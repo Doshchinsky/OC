@@ -3,7 +3,7 @@ CFLAGS = -g3 -O0 -Wall
 LIB = -lm
 INCLUDES = -I src/
 dirs = ./bin ./obj
-main_obj = ./obj/main.o ./obj/extralib.o
+main_obj = ./obj/main.o ./obj/extralib.o ./obj/autolib.o
 
 all: ./bin/main
 
@@ -19,6 +19,9 @@ $(dirs):
 
 ./obj/extralib.o: ./src/extralib.c
 	gcc -c ./src/extralib.c -Wall -o ./obj/extralib.o $(INCLUDES)
+
+./obj/autolib.o: ./src/autolib.c
+	gcc -c ./src/autolib.c -Wall -o ./obj/autolib.o $(INCLUDES)
 
 .PHONY: clean exec
 clean:

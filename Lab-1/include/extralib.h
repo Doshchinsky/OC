@@ -1,3 +1,6 @@
+#ifndef EXTRALIB_H
+#define EXTRALIB_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -6,3 +9,5 @@
 
 void read_file(char* input_filename, char* file);
 void read_stream(char* input_stream, char* stream);
+
+#endif
