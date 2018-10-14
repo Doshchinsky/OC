@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
 
   int choice = 1;
   printf("Which automatic should be used?\t(1-6)\n");
-  scanf("%d", &choice);
+  //scanf("%d", &choice);
 
   if (!automatic_processing(input_data, choice))
     printf("[SUCCESS]\n");

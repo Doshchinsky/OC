@@ -12,7 +12,6 @@ void read_file(char* input_filename, char* file)
 		exit(EXIT_FAILURE);
   }
   while (fscanf(fd_input, "%c", &file[cnt]) != EOF) {
-    printf("%c\n", file[cnt]);
     ++cnt;
   }
   fclose(fd_input);
@@ -23,7 +22,6 @@ void read_stream(char* input_stream, char* stream)
   int cnt = 0;
   while (input_stream[cnt] != '\0') {
     stream[cnt] = input_stream[cnt];
-    printf("%c\n", stream[cnt]);
     ++cnt;
   }
 }

@@ -35,6 +35,71 @@ int automatic_processing(char* data, int choice)
 
 void unsigned_automatic(char* data, int position, int* result)
 {
+  char *tokens[14] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", ".", "E"};
+  printf("Scanning %d position\n", position+1);
+
+  if (position == 0) {
+    if (data[position] == *tokens[position]) {
+      printf(">   %c\n", *tokens[position]);
+      if (data[position + 1] == *tokens[12]) {
+        unsigned_automatic(data, ++position, result);
+        return;
+      } else {
+        --*result;
+        return;
+      }
+    }
+    for (int i = 1; i < 10; ++i) {
+      if (data[position] == *tokens[i]) {
+        printf(">   %c\n", *tokens[i]);
+        unsigned_automatic(data, ++position, result);
+        return;
+      }
+    }
+    --*result;
+  }
+  if (data[position] == '\n' || data[position] == '\0') {
+    printf(">   EOF\n");
+    return;
+  }
+  for (int i = 0; i < 14; ++i) {
+    if (data[position] == *tokens[i]) {
+      if ((i > 9) && (i < 12)) {
+        printf(">   %c\n", *tokens[i]);
+        if (data[position - 1] == *tokens[13]) {
+          unsigned_automatic(data, ++position, result);
+          return;
+        } else {
+          --*result;
+          return;
+        }
+      } else if (i == 13) {
+        printf(">   %c\n", *tokens[i]);
+        for (int j = 0; j < 10; ++j) {
+          if (data[position - 1] == *tokens[j]) {
+            unsigned_automatic(data, ++position, result);
+            return;
+          }
+        }
+        --*result;
+      } else if (i == 12) {
+        printf(">   %c\n", *tokens[i]);
+        if (*result <= 0) {
+          ++*result;
+          unsigned_automatic(data, ++position, result);
+          --*result;
+          return;
+        } else {
+          --*result;
+          break;
+        }
+      } else {
+        printf(">   %c\n", *tokens[i]);
+        unsigned_automatic(data, ++position, result);
+        return;
+      }
+    }
+  }
   --*result;
 }
 
