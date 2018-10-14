@@ -105,7 +105,26 @@ void unsigned_automatic(char* data, int position, int* result)
 
 void fiveletter_automatic(char* data, int position, int* result)
 {
-  --*result;
+  char *tokens[5] = {"a", "e", "i", "o", "u"};
+  int combo = 0;
+  while (data[position] != '\n' && data[position] != '\0') {
+    printf("Scanning %d position\n", position+1);
+    if (data[position] == *tokens[0]) {
+      if (data[position + 1] == *tokens[1]) {
+        if (data[position + 2] == *tokens[2]) {
+          if (data[position + 3] == *tokens[3]) {
+            if (data[position + 4] == *tokens[4]) {
+              ++combo;
+            }
+          }
+        }
+      }
+    }
+    ++position;
+  }
+  if (combo < 1) {
+    --*result;
+  }
 }
 
 void ordered_automatic(char* data, int position, int* result)
