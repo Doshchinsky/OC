@@ -179,5 +179,18 @@ void excludeSubstring_automatic(char* data, int position, int* result)
 
 void excludeSubsequence_automatic(char* data, int position, int* result)
 {
-  --*result;
+  int combo = 0;
+  while (data[position] != '\n' && data[position] != '\0') {
+    if (data[position] == 'a') {
+      if (data[position + 1] == 'b') {
+        if (data[position + 2] == 'b') {
+          ++combo;
+        }
+      }
+    }
+    ++position;
+  }
+  if (combo != 0) {
+    --*result;
+  }
 }
