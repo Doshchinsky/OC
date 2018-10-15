@@ -84,7 +84,7 @@ void unsigned_automatic(char* data, int position, int* result)
         --*result;
       } else if (i == 12) {
         printf(">   %c\n", *tokens[i]);
-        if (*result <= 0) {
+        if ((*result <= 0) && (data[position + 1] != '\n')) {
           ++*result;
           unsigned_automatic(data, ++position, result);
           --*result;
@@ -108,7 +108,7 @@ void fiveletter_automatic(char* data, int position, int* result)
   char *tokens[5] = {"a", "e", "i", "o", "u"};
   int combo = 0;
   while (data[position] != '\n' && data[position] != '\0') {
-    printf("Scanning %d position\n", position+1);
+    printf("Scanning %d position\n", position + 1);
     if (data[position] == *tokens[0]) {
       if (data[position + 1] == *tokens[1]) {
         if (data[position + 2] == *tokens[2]) {
@@ -129,17 +129,52 @@ void fiveletter_automatic(char* data, int position, int* result)
 
 void ordered_automatic(char* data, int position, int* result)
 {
-  --*result;
+  char *tokens[6] = {"a", "b", "c", "d", "e", "f"};
+  int ordered = 0;
+  while ((data[position] != '\n') && (data[position] != '\0')) {
+    printf("Scanning %d position: %c\n", position + 1, data[position]);
+    if (data[position] == *tokens[ordered]) {
+      ++ordered;
+    } else if ((ordered != 0) && (ordered < 6)) {
+      --*result;
+    }
+    ++position;
+  }
+  if (ordered < 6) {
+    --*result;
+  }
 }
 
 void evenodd_automatic(char* data, int position, int* result)
 {
-  --*result;
+  int a_counter = 0, b_counter = 0;
+  while ((data[position] != '\0') && (data[position] != '\n')) {
+    if (data[position] == 'a') {
+      ++a_counter;
+    } else if (data[position] == 'b') {
+      ++b_counter;
+    }
+    ++position;
+  }
+  if ((a_counter % 2 == 0) && (b_counter % 2 != 0)) {
+    return;
+  } else --*result;
 }
 
 void excludeSubstring_automatic(char* data, int position, int* result)
 {
-  --*result;
+  int a_counter = 0, b_counter = 0;
+  while ((data[position] != '\0') && (data[position] != '\n')) {
+    if (data[position] == 'a') {
+      ++a_counter;
+    } else if (data[position] == 'b') {
+      ++b_counter;
+    }
+    ++position;
+  }
+  if ((a_counter > 0) && (b_counter > 1)) {
+    --*result;
+  }
 }
 
 void excludeSubsequence_automatic(char* data, int position, int* result)
