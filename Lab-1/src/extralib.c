@@ -11,7 +11,7 @@ void read_file(char* input_filename, char* file)
 		fprintf(stderr, "[ERROR] Can't open the file <%s> for reading\n", input_filename);
 		exit(EXIT_FAILURE);
   }
-  while (fscanf(fd_input, "%c", &file[cnt]) != EOF) {
+  while ((fscanf(fd_input, "%c", &file[cnt]) != EOF) && (cnt < 255)) {
     ++cnt;
   }
   fclose(fd_input);
@@ -20,7 +20,7 @@ void read_file(char* input_filename, char* file)
 void read_stream(char* input_stream, char* stream)
 {
   int cnt = 0;
-  while (input_stream[cnt] != '\0') {
+  while ((input_stream[cnt] != '\0') && (cnt < 255)) {
     stream[cnt] = input_stream[cnt];
     ++cnt;
   }
