@@ -131,19 +131,18 @@ void fiveletter_automatic(char* data, int position, int* result)
 void ordered_automatic(char* data, int position, int* result)
 {
   char *tokens[6] = {"a", "b", "c", "d", "e", "f"};
-  int ordered = 0;
-  while ((data[position] != '\n') && (data[position] != '\0')) {
-    printf("Scanning %d position: %c\n", position + 1, data[position]);
-    if (data[position] == *tokens[ordered]) {
-      ++ordered;
-    } else if ((ordered != 0) && (ordered < 6)) {
-      --*result;
+  int flg = 0;
+  while (data[position] != '\n' && data[position] != '\0') {
+    for (int i = 0; i < 5; ++i) {
+      if ((data[position] == *tokens[i]) && (flg < i)) {
+        flg = i;
+      } else if (i <= flg) {
+        --*result;
+      }
     }
     ++position;
   }
-  if (ordered < 6) {
-    --*result;
-  }
+
 }
 
 void evenodd_automatic(char* data, int position, int* result)
@@ -162,13 +161,13 @@ void evenodd_automatic(char* data, int position, int* result)
   } else --*result;
 }
 
-void excludeSubstring_automatic(char* data, int position, int* result)
+void excludeSubsequence_automatic(char* data, int position, int* result)
 {
   int a_counter = 0, b_counter = 0;
   while ((data[position] != '\0') && (data[position] != '\n')) {
     if (data[position] == 'a') {
       ++a_counter;
-    } else if (data[position] == 'b') {
+    } else if ((data[position] == 'b') && (a_counter > 0)) {
       ++b_counter;
     }
     ++position;
@@ -178,7 +177,7 @@ void excludeSubstring_automatic(char* data, int position, int* result)
   }
 }
 
-void excludeSubsequence_automatic(char* data, int position, int* result)
+void excludeSubstring_automatic(char* data, int position, int* result)
 {
   int combo = 0;
   while (data[position] != '\n' && data[position] != '\0') {
