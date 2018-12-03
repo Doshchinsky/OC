@@ -1,12 +1,5 @@
 #include "/usr/include/llvm/Bitcode/BitcodeReader.h"
-#include "/usr/include/llvm/Bitcode/BitcodeWriter.h"
-#include "/usr/include/llvm/IR/Function.h"
-#include "/usr/include/llvm/IR/LLVMContext.h"
-#include "/usr/include/llvm/IR/Module.h"
-#include "/usr/include/llvm/Support/CommandLine.h"
-#include "/usr/include/llvm/Support/ErrorOr.h"
-#include "/usr/include/llvm/Support/MemoryBuffer.h"
-#include "/usr/include/llvm/Support/raw_ostream.h"
+
 
 using namespace llvm;
 
