@@ -18,9 +18,7 @@ int main(int argc, char** argv)
   // CXSourceLocation loc_start = clang_getLocationForOffset(translationUnit, file, 0);
   // CXSourceLocation loc_end = clang_getLocationForOffset(translationUnit, file, );
   // CXSourceRange range = clang_getRange(loc_start, loc_end);
-
-  CXTranslationUnit TU = clang_parseTranslationUnit(index, 0, argv, argc, 0, 0, CXTranslationUnit_None);
-  CXSourceRange range = clang_getCursorExtent(clang_getTranslationUnitCursor(TU));
+  CXSourceRange range = clang_getCursorExtent(clang_getTranslationUnitCursor(translationUnit));
 
   unsigned numTokens = 0;
   CXToken *tokens = NULL;
